@@ -1,3 +1,5 @@
+const cid = "Qma6F5GPj8Mv2bdaoT75Gt9Csf9QCyjCzaF6846ct5J6gy"
+const token = "70c54a13.7463cc0d2b504abdb6543167e13f6a15."  // No se usa aquí directamente
 let angle = 0
 let elements = []
 let fade = 255
@@ -12,15 +14,20 @@ function setup() {
   textSize(16)
   textAlign(CENTER, CENTER)
 
-  if (window.cid) {
-    for (let i = 0; i < window.cid.length; i++) {
-      const char = window.cid.charCodeAt(i)
-      const radius = random(50, width / 2)
-      const speed = random(0.005, 0.02)
-      const col = color((char * 3) % 255, (char * 5) % 255, (char * 7) % 255)
-      elements.push({ radius, speed, angleOffset: angle, color: col })
-    }
-  }
+  fetch(`https://ipfs.io/ipfs/${cid}/archivo.txt`)
+    .then(response => response.text())
+    .then(data => {
+      for (let i = 0; i < data.length; i++) {
+        const char = data.charCodeAt(i)
+        const radius = random(50, width / 2)
+        const speed = random(0.005, 0.02)
+        const col = color((char * 3) % 255, (char * 5) % 255, (char * 7) % 255)
+        elements.push({ radius, speed, angleOffset: angle, color: col })
+      }
+    })
+    .catch(err => {
+      console.error("Error al cargar desde IPFS:", err)
+    })
 }
 
 function draw() {
