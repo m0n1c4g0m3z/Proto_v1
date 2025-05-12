@@ -2,7 +2,7 @@ const cid = "Qma6F5GPj8Mv2bdaoT75Gt9Csf9QCyjCzaF6846ct5J6gy"
 let angle = 0
 let elements = []
 let timer = 0
-let MAX_TIME = 300
+let MAX_TIME = 3600
 
 function setup() {
   const canvas = createCanvas(windowWidth, windowHeight)
