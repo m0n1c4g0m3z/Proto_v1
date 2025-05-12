@@ -1,4 +1,4 @@
-const cid = "Qma6F5GPj8Mv2bdaoT75Gt9Csf9QCyjCzaF6846ct5J6gy"
+const cid = "QmY9pd9vyFAP1SVzknobVHi5zwL6MWG9h7Wm87XcvkEWRX"
 let angle = 0
 let elements = []
 let timer = 0
@@ -12,7 +12,7 @@ function setup() {
   textSize(16)
   textAlign(CENTER, CENTER)
 
- fetch(`https://ipfs.io/ipfs/${cid}/hola%20mundo.txt`)
+fetch(`https://ipfs.io/ipfs/${cid}`)
     .then(response => response.text())
     .then(data => {
       for (let i = 0; i < data.length; i++) {
