@@ -12,7 +12,7 @@ function setup() {
   textSize(16)
   textAlign(CENTER, CENTER)
 
-  fetch(`https://ipfs.io/ipfs/${cid}/archivo.txt`)
+ fetch(`https://ipfs.io/ipfs/${cid}/hola%20mundo.txt`)
     .then(response => response.text())
     .then(data => {
       for (let i = 0; i < data.length; i++) {
