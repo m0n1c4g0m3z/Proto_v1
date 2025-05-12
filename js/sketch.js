@@ -1,8 +1,6 @@
 const cid = "Qma6F5GPj8Mv2bdaoT75Gt9Csf9QCyjCzaF6846ct5J6gy"
-const token = "70c54a13.7463cc0d2b504abdb6543167e13f6a15."  // No se usa aquí directamente
 let angle = 0
 let elements = []
-let fade = 255
 let timer = 0
 let MAX_TIME = 300
 
@@ -43,6 +41,7 @@ function draw() {
     el.angleOffset += el.speed
   }
 
+  angle += 0.01
   timer++
   if (timer > MAX_TIME) {
     noLoop()
