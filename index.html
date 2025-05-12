@@ -2,22 +2,16 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Identidad en tránsito — Interfaz efímera</title>
-  <link rel="stylesheet" href="css/styles.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Identidad Efímera</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.4.2/lib/p5.min.js"></script>
 </head>
 <body>
-  <main>
-    <h1>Intervención efímera</h1>
-    <form id="upload-form">
-      <input type="file" id="file-input" accept="image/*,text/plain,audio/*" required />
-      <button type="submit">Subir archivo</button>
-    </form>
-    <p id="cid-output"></p>
-    <div id="canvas-holder"></div>
-  </main>
-
-  <script type="module" src="js/script.js"></script>
+  <div id="canvas-holder"></div>
+  <script>
+    window.cid = "bafybeia6xu5xv6ebozzr6aij5fjvjcqf7g5nmqop3n3dnclwjw4xj5d4zy"; // Sustituir por CID real
+  </script>
+  <script src="js/sketch.js"></script>
 </body>
 </html>
