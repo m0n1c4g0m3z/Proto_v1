@@ -1,51 +1,55 @@
-const cid = "QmTrs32nNX8U7a1aWecZSTyfL1wXFkdX1FUxyxYGgh8E3i";
-let angle = 0;
-let elements = [];
-let timer = 0;
-let MAX_TIME = 3600;
+let palabras = [
+  "transitar", "efímero", "presencia", "desaparición", "fragmento", "gesto",
+  "archivo", "anonimato", "huella", "memoria", "acto", "silencio", "vacío",
+  "intersticio", "suspensión", "ritmo", "latencia", "inestabilidad", "flujo",
+  "borrado", "cuerpo", "situación", "residuo", "escucha", "latido", "resonancia",
+  "desvío", "ocultamiento", "desequilibrio", "mínimo", "rastros", "invisibilidad",
+  "apertura", "intervalo", "eco", "intención", "vulnerabilidad", "reversibilidad",
+  "autonomía", "inserción", "interferencia", "modulación", "constelación",
+  "coexistencia", "reiteración", "pliegue", "vacilación", "gestualidad", "disonancia"
+]
+
+let textos = []
 
 function setup() {
-  const canvas = createCanvas(windowWidth, windowHeight);
-  canvas.parent('canvas-holder');
-  background(0);
-  textFont('monospace');
-  textSize(16);
-  textAlign(CENTER, CENTER);
-
-  fetch(`https://ipfs.io/ipfs/${cid}/hola.txt`)
-    .then(response => response.text())
-    .then(data => {
-      for (let i = 0; i < data.length; i++) {
-        const char = data.charCodeAt(i);
-        const radius = random(50, width / 2);
-        const speed = random(0.005, 0.02);
-        const col = color((char * 3) % 255, (char * 5) % 255, (char * 7) % 255);
-        elements.push({ radius, speed, angleOffset: angle, color: col });
-      }
-    })
-    .catch(err => {
-      console.error("Error al cargar desde IPFS:", err);
-    });
+  createCanvas(windowWidth, windowHeight)
+  textFont('monospace')
+  textSize(24)
+  textAlign(CENTER, CENTER)
+  noStroke()
+  fill(255)
+  background(0)
 }
 
 function draw() {
-  background(0, 20);
-  translate(width / 2, height / 2);
+  background(0, 30)
 
-  for (let el of elements) {
-    let x = el.radius * cos(angle + el.angleOffset);
-    let y = el.radius * sin(angle + el.angleOffset);
-    fill(el.color);
-    noStroke();
-    ellipse(x, y, 8);
-    el.angleOffset += el.speed;
+  for (let i = textos.length - 1; i >= 0; i--) {
+    let t = textos[i]
+    text(t.palabra, t.x, t.y)
+    t.alpha -= 2
+    if (t.alpha <= 0) {
+      textos.splice(i, 1)
+    } else {
+      fill(255, t.alpha)
+    }
   }
+}
 
-  angle += 0.01;
-  timer++;
-  if (timer > MAX_TIME) {
-    noLoop();
-    clear();
-    document.getElementById('canvas-holder').innerHTML = '<p style="color:white;text-align:center;">Tu intervención ha desaparecido.</p>';
-  }
+function mouseMoved() {
+  mostrarPalabra()
+}
+
+function mousePressed() {
+  mostrarPalabra()
+}
+
+function mostrarPalabra() {
+  let palabra = random(palabras)
+  textos.push({
+    palabra: palabra,
+    x: random(width),
+    y: random(height),
+    alpha: 255
+  })
 }
