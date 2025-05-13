@@ -1,3 +1,4 @@
+let letras = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ".split("")
 let palabras = [
   "transitar", "efímero", "presencia", "desaparición", "fragmento", "gesto",
   "archivo", "anonimato", "huella", "memoria", "acto", "silencio", "vacío",
@@ -9,47 +10,54 @@ let palabras = [
   "coexistencia", "reiteración", "pliegue", "vacilación", "gestualidad", "disonancia"
 ]
 
-let textos = []
+let elementos = []
 
 function setup() {
   createCanvas(windowWidth, windowHeight)
-  textFont('monospace')
-  textSize(24)
-  textAlign(CENTER, CENTER)
-  noStroke()
-  fill(255)
   background(0)
+  textFont('monospace')
+  textAlign(CENTER, CENTER)
+  noCursor()
 }
 
 function draw() {
-  background(0, 30)
+  background(0, 25)
 
-  for (let i = textos.length - 1; i >= 0; i--) {
-    let t = textos[i]
-    text(t.palabra, t.x, t.y)
-    t.alpha -= 2
-    if (t.alpha <= 0) {
-      textos.splice(i, 1)
-    } else {
-      fill(255, t.alpha)
+  for (let i = elementos.length - 1; i >= 0; i--) {
+    let e = elementos[i]
+    fill(255, e.alpha)
+    textSize(e.size)
+    text(e.texto, e.x, e.y)
+    e.alpha -= 1.2
+    if (e.alpha <= 0) {
+      elementos.splice(i, 1)
     }
   }
+
+  noFill()
+  stroke(255, 50)
+  ellipse(mouseX, mouseY, 20)
 }
 
 function mouseMoved() {
-  mostrarPalabra()
-}
-
-function mousePressed() {
-  mostrarPalabra()
-}
-
-function mostrarPalabra() {
-  let palabra = random(palabras)
-  textos.push({
-    palabra: palabra,
-    x: random(width),
-    y: random(height),
-    alpha: 255
+  let letra = random(letras)
+  elementos.push({
+    texto: letra,
+    x: mouseX + random(-20, 20),
+    y: mouseY + random(-20, 20),
+    alpha: 255,
+    size: random(14, 22)
   })
+}
+
+function mouseClicked() {
+  for (let i = 0; i < 4; i++) {
+    elementos.push({
+      texto: random(palabras),
+      x: random(width),
+      y: random(height),
+      alpha: 255,
+      size: random(18, 28)
+    })
+  }
 }
